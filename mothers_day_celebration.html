@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mother's Day Surprise</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+text-align:center;
+padding:30px;
+color:#333;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:20px;
+max-width:700px;
+margin:auto;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+button{
+background:#ff6b81;
+border:none;
+color:white;
+padding:12px 25px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+margin-top:15px;
+}
+
+button:hover{
+background:#ff4757;
+}
+
+.hidden{
+display:none;
+}
+
+img{
+max-width:300px;
+border-radius:15px;
+margin-top:20px;
+}
+
+.message{
+font-size:18px;
+margin-top:20px;
+line-height:1.6;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🌸 Mother's Day Surprise 🌸</h1>
+
+<div id="formSection">
+
+<p>Before we begin, tell us your name and your children's names 💖</p>
+
+<input id="momName" placeholder="Mother's Name"><br><br>
+<input id="kidsName" placeholder="Children's Names"><br><br>
+
+<p>Upload a photo of you and your children:</p>
+<input type="file" id="photoInput"><br><br>
+
+<button onclick="showResult()">Open the Surprise</button>
+
+</div>
+
+<div id="resultSection" class="hidden">
+
+<h1>💐 Happy Mother's Day 💐</h1>
+
+<img id="momPhoto">
+
+<div class="message" id="finalMessage"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function showResult(){
+
+let mom=document.getElementById("momName").value;
+let kids=document.getElementById("kidsName").value;
+
+if(mom=="" || kids==""){
+alert("Please enter the names first!");
+return;
+}
+
+document.getElementById("formSection").classList.add("hidden");
+document.getElementById("resultSection").classList.remove("hidden");
+
+let photoInput = document.getElementById("photoInput");
+let photo = document.getElementById("momPhoto");
+
+if(photoInput.files[0]){
+photo.src = URL.createObjectURL(photoInput.files[0]);
+}
+
+confetti({
+particleCount:200,
+spread:120
+});
+
+let message = `
+Dear <b>${mom}</b>,
+
+Today we celebrate the incredible love, strength, and kindness that you share with <b>${kids}</b> every single day.
+
+Motherhood is a journey filled with sacrifices, patience, laughter, and endless love. Your care and dedication shape the hearts and futures of your children in ways that words can never fully express.
+
+This small interactive surprise was created to bring a smile to your face and remind you how deeply appreciated you are.
+
+On behalf of <b>Green Hills School</b>, we want to thank you for everything you do for your children and for our school community.
+
+This little gesture was lovingly prepared by the <b>Student Council</b> as a symbol of gratitude and admiration for all mothers.
+
+Happy Mother's Day! 💐
+
+With appreciation and love,
+Green Hills School Student Council
+`;
+
+document.getElementById("finalMessage").innerHTML = message;
+
+}
+
+</script>
+
+</body>
+</html>
